@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>禁止克隆敌对恐龙 服主教程</title>
+<style>
+/* ============================================================
+   样式区：禁止修改！
+   本模板是 xiangmujiaocheng 技能的「服主教程」专属模板（清爽文档蓝）。
+   修改此区会破坏所有项目服主教程的视觉统一。
+   ============================================================ */
+:root{--acc:#2563eb;--accbg:#eff6ff;--line:#e2e8f0;--line2:#cbd5e1;--text:#1e293b;--dim:#64748b;--bg2:#f8fafc;--ok:#16a34a;--warn:#d97706;--warnbg:#fffbeb;--warnline:#fde68a}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:15.5px/1.85 "Microsoft YaHei","PingFang SC","Segoe UI",sans-serif;color:var(--text);background:#fff}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+code{background:var(--accbg);color:#1d4ed8;border-radius:4px;padding:1px 7px;font-family:Consolas,"Courier New",monospace;font-size:13.5px}
+pre{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:13px 16px;overflow:auto}
+pre code{background:none;color:#0f172a;padding:0}
+.hide{display:none!important}
+
+.hero{background:linear-gradient(180deg,#eef5ff 0%,#ffffff 100%);border-bottom:1px solid var(--line);padding:36px 20px 26px}
+.hero-in{max-width:1180px;margin:0 auto}
+.kind{display:inline-block;background:var(--acc);color:#fff;border-radius:4px;font-size:13px;padding:2px 12px;letter-spacing:2px}
+.hero h1{margin:12px 0 6px;font-size:30px}
+.hero h1 .accent{color:var(--acc)}
+.hero .sub{color:var(--dim);margin:0;font-size:15px}
+
+.toolbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 1px 3px rgba(15,23,42,.05)}
+.toolbar-in{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:10px 20px}
+#searchInput{flex:1 1 240px;border:1px solid var(--line2);border-radius:8px;padding:8px 14px;font-size:14.5px;outline:none;background:var(--bg2)}
+#searchInput:focus{border-color:var(--acc);background:#fff;box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid var(--line2);background:#fff;color:var(--dim);border-radius:999px;padding:5px 15px;font-size:13.5px;cursor:pointer}
+.chip:hover{border-color:var(--acc);color:var(--acc)}
+.chip.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.count{color:var(--dim);font-size:13px;white-space:nowrap}
+
+.layout{max-width:1180px;margin:0 auto;padding:26px 20px 70px;display:flex;gap:36px;align-items:flex-start}
+.toc{flex:0 0 215px;position:sticky;top:66px}
+.toc-title{font-size:12.5px;color:var(--dim);letter-spacing:3px;margin-bottom:8px;padding-left:10px}
+.toc a{display:block;color:var(--dim);padding:6px 10px;border-left:2px solid var(--line);font-size:14px}
+.toc a:hover{color:var(--acc);border-left-color:var(--acc);background:var(--accbg);text-decoration:none}
+.toc a.dim{opacity:.35}
+.content{flex:1 1 500px;min-width:320px}
+
+.unit{margin:0 0 38px}
+.group{font-size:12.5px;color:var(--acc);letter-spacing:2px;margin-bottom:4px}
+.unit>h2{margin:0 0 10px;font-size:22px;border-left:4px solid var(--acc);padding-left:12px}
+.lead{color:var(--dim);margin:0 0 14px;font-size:14.5px}
+.unit h3{font-size:16.5px;margin:20px 0 8px}
+
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:13px;margin:16px 0}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:15px 17px;box-shadow:0 1px 2px rgba(15,23,42,.04);transition:.15s}
+.card:hover{border-color:var(--acc);box-shadow:0 4px 14px rgba(37,99,235,.12)}
+.card .icon{font-size:22px}
+.card h4{margin:7px 0 5px;font-size:15.5px;color:var(--acc)}
+.card p{margin:0;color:var(--dim);font-size:13.5px}
+
+ol.steps{list-style:none;counter-reset:st;padding:0;margin:8px 0 0}
+ol.steps>li{counter-increment:st;position:relative;padding:0 0 20px 48px}
+ol.steps>li::before{content:counter(st);position:absolute;left:0;top:2px;width:30px;height:30px;border-radius:50%;background:var(--acc);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+ol.steps>li::after{content:"";position:absolute;left:14px;top:36px;bottom:4px;width:2px;background:var(--line)}
+ol.steps>li:last-child{padding-bottom:2px}
+ol.steps>li:last-child::after{display:none}
+.step-title{display:block;font-weight:700;margin-bottom:3px}
+ol.steps p{margin:0}
+
+.note,.warning{border-radius:8px;padding:12px 16px;margin:14px 0;font-size:14.5px}
+.note{background:var(--accbg);border:1px solid #bfdbfe}
+.warning{background:var(--warnbg);border:1px solid var(--warnline)}
+
+table.data-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14.5px}
+.data-table th{background:var(--accbg);color:#1d4ed8;text-align:left}
+.data-table th,.data-table td{border:1px solid var(--line);padding:8px 13px}
+.data-table tr:nth-child(even) td{background:#fbfdff}
+.data-table td code{white-space:nowrap}
+
+details.faq{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:10px 16px;margin:9px 0}
+details.faq summary{cursor:pointer;font-weight:600}
+details.faq[open]{border-color:var(--acc)}
+details.faq .answer{color:var(--dim);padding-top:7px}
+
+.shot{border:2px dashed var(--line2);border-radius:8px;padding:26px;text-align:center;color:var(--dim);font-size:14px;margin:13px 0}
+.badge{display:inline-block;border-radius:4px;padding:1px 10px;font-size:12.5px;margin-right:6px;color:var(--acc);border:1px solid var(--acc)}
+.badge.ok{color:var(--ok);border-color:var(--ok)}
+.badge.warn{color:var(--warn);border-color:var(--warn)}
+.empty{border:1px dashed var(--line2);border-radius:10px;padding:44px;text-align:center;color:var(--dim);margin:20px 0}
+
+.foot{border-top:1px solid var(--line);color:var(--dim);text-align:center;padding:20px;font-size:13px;background:var(--bg2)}
+@media (max-width:820px){.toc{display:none}.layout{padding-top:18px}.hero h1{font-size:24px}}
+</style>
+</head>
+<body>
+
+<header class="hero"><div class="hero-in">
+  <span class="kind">服主教程</span>
+  <h1>禁止克隆敌对恐龙 <span class="accent">配置与部署指南</span></h1>
+  <p class="sub">面向服主：安装部署、全部配置项详解与疑难排查</p>
+</div></header>
+
+<div class="toolbar"><div class="toolbar-in">
+  <input id="searchInput" type="search" placeholder="搜索配置项、命令、问题…">
+  <div class="chips">
+    <button class="chip on" data-cat="all">全部</button>
+    <button class="chip" data-cat="deploy">部署</button>
+    <button class="chip" data-cat="basic">基础配置</button>
+    <button class="chip" data-cat="cmd">命令详解</button>
+    <button class="chip" data-cat="faq">疑难解答</button>
+  </div>
+  <span class="count" id="resultCount"></span>
+</div></div>
+
+<div class="layout">
+<nav class="toc">
+  <div class="toc-title">目录</div>
+  <a href="#u1">软件总览</a>
+  <a href="#u2">环境要求</a>
+  <a href="#u3">部署安装</a>
+  <a href="#u4">配置文件说明</a>
+  <a href="#u5">配置总表</a>
+  <a href="#u6">ConsoleEncoding</a>
+  <a href="#u7">提示消息</a>
+  <a href="#u8">显示秒数</a>
+  <a href="#u9">提示颜色RGBA</a>
+  <a href="#u10">Reload 命令</a>
+  <a href="#u11">常见问题</a>
+  <a href="#u12">技术支持</a>
+</nav>
+
+<main class="content">
+
+<section class="unit" id="u1" data-cat="basic">
+  <div class="group">第一章 · 软件总览</div>
+  <h2>软件总览</h2>
+  <p class="lead">「禁止克隆敌对恐龙」是方舟生存进化的服务端插件：玩家在克隆舱里只能克隆<b>本部落</b>的恐龙，克隆敌方或他人部落的恐龙会被自动拦截，防止高属性龙的育种成果被人白拿。装好后自动生效，全部行为通过 config.json 配置。</p>
+  <div class="card-grid">
+    <div class="unit card" data-cat="basic"><div class="icon">🛡️</div><h4>克隆拦截</h4><p>克隆非本部落恐龙的命令被直接拦截，克隆舱不会启动，龙复制不出来。</p></div>
+    <div class="unit card" data-cat="basic"><div class="icon">🧭</div><h4>部落精准判定</h4><p>按部落 ID 比对发起玩家与目标恐龙，同部落照常克隆，互不影响正常玩法。</p></div>
+    <div class="unit card" data-cat="basic"><div class="icon">💬</div><h4>拦截提示自定义</h4><p>被拦截的玩家收到屏幕中央提示，文案、显示时长、颜色全部可在配置里改。</p></div>
+    <div class="unit card" data-cat="basic"><div class="icon">📝</div><h4>拦截留痕</h4><p>每次拦截记录玩家 SteamID、双方部落 ID、恐龙名、命令名，按天写入日志文件。</p></div>
+    <div class="unit card" data-cat="cmd"><div class="icon">♻️</div><h4>配置热重载</h4><p>改完配置执行一条 Reload 命令立即生效，不用重启服务器。</p></div>
+    <div class="unit card" data-cat="deploy"><div class="icon">📦</div><h4>轻量部署</h4><p>单 DLL 插件，不连数据库、不需要额外运行库，放对目录即可用。</p></div>
+  </div>
+</section>
+
+<section class="unit" id="u2" data-cat="deploy">
+  <div class="group">第二章 · 环境要求</div>
+  <h2>环境要求</h2>
+  <table class="data-table">
+    <tr><th style="width:160px">项目</th><th>要求</th></tr>
+    <tr><td>操作系统</td><td>Windows x64（方舟服务端本身的运行环境）</td></tr>
+    <tr><td>服务端框架</td><td>已安装 ArkApi 的方舟生存进化服务端，ArkApi 版本不低于 3.5</td></tr>
+    <tr><td>插件文件</td><td><code>PreventCloningEnemyDinos.dll</code>、<code>PluginInfo.json</code>、<code>config.json</code> 三个文件</td></tr>
+    <tr><td>其他依赖</td><td>无：不使用数据库，不需要额外运行库</td></tr>
+  </table>
+</section>
+
+<section class="unit" id="u3" data-cat="deploy">
+  <div class="group">第三章 · 部署安装</div>
+  <h2>部署安装</h2>
+  <ol class="steps">
+    <li><span class="step-title">找到插件目录</span><p>打开服务器的 <code>ShooterGame\Binaries\Win64\ArkApi\Plugins</code> 目录 → 在里面新建文件夹 <code>PreventCloningEnemyDinos</code> → 下一步。</p></li>
+    <li><span class="step-title">放入插件文件</span><p>把 <code>PreventCloningEnemyDinos.dll</code>、<code>PluginInfo.json</code>、<code>config.json</code> 三个文件复制进刚才新建的文件夹 → 下一步。</p></li>
+    <li><span class="step-title">启动服务器</span><p>正常启动方舟服务端 → ArkApi 会自动加载插件 → 下一步。</p></li>
+    <li><span class="step-title">确认加载成功</span><p>在服务器控制台看到一行「先锋.禁止克隆敌对恐龙(1.0) 先锋方舟服主群:138535385 作者QQ:711919」→ 插件已开始工作。</p></li>
+    <li><span class="step-title">验证效果</span><p>用部落 A 的玩家尝试克隆部落 B 的恐龙 → 克隆舱无反应，屏幕出现提示文案 → 拦截生效；再克隆本部落的龙确认正常放行。</p></li>
+  </ol>
+  <div class="warning">服务器运行期间不要直接替换 DLL 文件（文件被占用会失败）。更新插件请先关服，再覆盖文件。</div>
+</section>
+
+<section class="unit" id="u4" data-cat="basic">
+  <div class="group">第四章 · 配置详解</div>
+  <h2>配置文件说明</h2>
+  <p>插件的所有配置都在一个 JSON 文件里，位置：</p>
+  <pre><code>服务器目录\ShooterGame\Binaries\Win64\ArkApi\Plugins\PreventCloningEnemyDinos\config.json</code></pre>
+  <p>完整配置示例（可直接复制后按需修改）：</p>
+  <pre><code>{
+  "ConsoleEncoding": "auto",
+  "禁止克隆": {
+    "提示消息": "小伙子,又卡BUG呢？想啥呢?意不意外,你看看卡成了吗?",
+    "显示秒数": 15,
+    "提示颜色R": 0,
+    "提示颜色G": 255,
+    "提示颜色B": 255,
+    "提示颜色A": 100
+  }
+}</code></pre>
+  <div class="note">JSON 里逗号、引号一个都不能少：每个键值对之间用英文逗号分隔，字符串要包在英文双引号里，最后一项后面不带逗号。建议用带 JSON 校验的编辑器（如 VS Code）修改；改前先备份一份。</div>
+</section>
+
+<section class="unit" id="u5" data-cat="basic">
+  <div class="group">第四章 · 配置详解</div>
+  <h2>配置总表</h2>
+  <p class="lead">本表列出全部配置键与兜底值，可配合页面搜索定位；详细讲法见后续各节。</p>
+  <table class="data-table">
+    <tr><th style="width:170px">配置键</th><th style="width:110px">所在小节</th><th style="width:150px">兜底值</th><th>说明</th></tr>
+    <tr><td><code>ConsoleEncoding</code></td><td>顶层</td><td><code>auto</code></td><td>服务器控制台的中文编码模式</td></tr>
+    <tr><td><code>提示消息</code></td><td><code>禁止克隆</code></td><td>见第七章</td><td>被拦截玩家看到的屏幕提示文案</td></tr>
+    <tr><td><code>显示秒数</code></td><td><code>禁止克隆</code></td><td><code>15</code></td><td>提示在屏幕上的停留秒数</td></tr>
+    <tr><td><code>提示颜色R</code></td><td><code>禁止克隆</code></td><td><code>0</code></td><td>提示颜色红色分量（0~255）</td></tr>
+    <tr><td><code>提示颜色G</code></td><td><code>禁止克隆</code></td><td><code>255</code></td><td>提示颜色绿色分量（0~255）</td></tr>
+    <tr><td><code>提示颜色B</code></td><td><code>禁止克隆</code></td><td><code>255</code></td><td>提示颜色蓝色分量（0~255）</td></tr>
+    <tr><td><code>提示颜色A</code></td><td><code>禁止克隆</code></td><td><code>100</code></td><td>提示不透明度（0~255，越小越透明）</td></tr>
+  </table>
+  <div class="note">整个 <code>禁止克隆</code> 节点都可以不写：缺省时插件用全部默认值照常工作，并在控制台黄字提醒「缺少 禁止克隆 节点」。任何一个配置项类型写错或数值越界，插件都会黄字告警并保留默认值，<b>不会</b>导致加载失败。</div>
+</section>
+
+<section class="unit" id="u6" data-cat="basic">
+  <div class="group">第四章 · 配置详解</div>
+  <h2>ConsoleEncoding（控制台编码）</h2>
+  <p><b>什么意思：</b>控制插件往服务器控制台输出中文时用什么编码。不同版本的 ArkApi 控制台编码不一样（3.54 是 GBK，3.55 是 UTF-8），配错了控制台中文会显示乱码。这个配置<b>只影响控制台显示</b>，不影响拦截功能本身。</p>
+  <p><b>兜底值：</b><span class="badge">auto</span>（不配置或值非法时自动探测：按控制台当前代码页决定转不转码）</p>
+  <p><b>怎么修改：</b>可选值如下表；值大小写不限；写成其他内容会黄字告警并回落 auto。</p>
+  <table class="data-table">
+    <tr><th style="width:140px">取值</th><th>效果</th></tr>
+    <tr><td><code>auto</code></td><td>自动探测（推荐，两种服务器通用）</td></tr>
+    <tr><td><code>gbk</code> 或 <code>ansi</code></td><td>强制按 GBK 输出（ArkApi 3.54 的服务器）</td></tr>
+    <tr><td><code>utf8</code> 或 <code>utf-8</code></td><td>强制按 UTF-8 输出（ArkApi 3.55 的服务器）</td></tr>
+  </table>
+  <p>只接受字符串类型：写成数字等其他类型按非法值处理，黄字告警后回落 auto。</p>
+</section>
+
+<section class="unit" id="u7" data-cat="basic">
+  <div class="group">第四章 · 配置详解</div>
+  <h2>提示消息</h2>
+  <p><b>什么意思：</b>玩家尝试克隆非本部落恐龙被拦截时，屏幕中央弹出的提示文字。想换成正经警告或换成你服务器的风格，改这里。</p>
+  <p><b>兜底值：</b><span class="badge">小伙子,又卡BUG呢？想啥呢?意不意外,你看看卡成了吗?</span></p>
+  <pre><code>{
+  "禁止克隆": {
+    "提示消息": "克隆失败：只能克隆本部落的恐龙！"
+  }
+}</code></pre>
+  <p><b>怎么修改：</b>把引号里的文字换成你想要的提示即可，中文英文都行。必须是字符串（带双引号）；写成数字等类型会黄字告警并保留默认文案。修改后执行 Reload 命令立即生效。</p>
+</section>
+
+<section class="unit" id="u8" data-cat="basic">
+  <div class="group">第四章 · 配置详解</div>
+  <h2>显示秒数</h2>
+  <p><b>什么意思：</b>提示消息在玩家屏幕上的停留时间（秒）。时间到后提示自动消失。</p>
+  <p><b>兜底值：</b><span class="badge">15 秒</span></p>
+  <pre><code>{
+  "禁止克隆": {
+    "显示秒数": 8
+  }
+}</code></pre>
+  <p><b>怎么修改：</b>填数字，合法范围是大于 0 且不超过 3600；越界或类型不对会黄字告警并保留默认 15 秒。示例改成 8 表示提示停留 8 秒。</p>
+</section>
+
+<section class="unit" id="u9" data-cat="basic">
+  <div class="group">第四章 · 配置详解</div>
+  <h2>提示颜色RGBA</h2>
+  <p><b>什么意思：</b>提示文字的颜色。R/G/B 是红绿蓝三色分量，A 是不透明度，各填 0~255 的数字。默认 <code>0,255,255,100</code> 是半透明青色。</p>
+  <p><b>兜底值：</b><span class="badge">R=0 G=255 B=255 A=100</span></p>
+  <pre><code>{
+  "禁止克隆": {
+    "提示颜色R": 255,
+    "提示颜色G": 200,
+    "提示颜色B": 0,
+    "提示颜色A": 255
+  }
+}</code></pre>
+  <p><b>怎么修改：</b>四个键必须<b>同时存在且都合法</b>才会生效：任何一个缺失、类型不是数字、或数值超出 0~255，整组颜色保留默认值并黄字告警。示例改完是醒目的不透明橙黄色。</p>
+</section>
+
+<section class="unit" id="u10" data-cat="cmd">
+  <div class="group">第五章 · 命令用法详解</div>
+  <h2>命令总表与 Reload</h2>
+  <p class="lead">本插件只有一条管理命令，在<b>服务器控制台</b>或 <b>RCON 远程管理工具</b>里输入，玩家在游戏内聊天框用不了，也没有玩家命令。命令名不支持通过配置改名。</p>
+  <table class="data-table">
+    <tr><th>命令</th><th style="width:100px">权限</th><th>作用</th><th style="width:110px">改名配置键</th></tr>
+    <tr><td><code>PreventCloningEnemyDinos.Reload</code></td><td>控制台·RCON</td><td>重新读取 config.json，配置立即生效</td><td>不支持改名</td></tr>
+  </table>
+  <div class="note">符号约定：命令格式里的 <code>[方括号]</code> 表示可选参数，只是标注——<b>实际输入时不要输入方括号</b>。本插件的命令无任何参数，照抄整条命令即可。</div>
+  <h3>PreventCloningEnemyDinos.Reload</h3>
+  <p><b>作用：</b>修改 config.json 后不重启服务器，直接让新配置生效（提示文案、颜色、编码等全部重新读取）。</p>
+  <pre><code>PreventCloningEnemyDinos.Reload</code></pre>
+  <table class="data-table">
+    <tr><th>参数</th><th style="width:60px">必填</th><th style="width:110px">缺省值</th><th>说明</th></tr>
+    <tr><td>（无）</td><td>—</td><td>—</td><td>本命令无参数</td></tr>
+  </table>
+  <p>示例：<code>PreventCloningEnemyDinos.Reload</code>（整条照抄：服务器立即重新读取配置文件并应用）。</p>
+  <p><b>反馈：</b>配置读取成功，控制台回绿字 <code>Reloaded config</code>（RCON 端同样收到这条文本）；config.json 不存在或 JSON 格式坏了，控制台回红字 <code>Failed to reload config</code>（RCON 收到具体错误原因），此时继续沿用旧配置，不影响拦截功能运行。</p>
+</section>
+
+<section class="unit" id="u11" data-cat="faq">
+  <div class="group">第六章 · 常见问题</div>
+  <h2>常见问题</h2>
+  <details class="faq"><summary>玩家说克隆别人家的龙“没反应”？</summary><div class="answer">这就是插件的正常工作状态：非本部落恐龙的克隆命令被拦截，克隆舱不会启动。玩家屏幕中央应同时出现提示文案；如果没注意看，提示默认停留 15 秒。可在 <code>日志\日期.txt</code> 里查到这条拦截记录。</div></details>
+  <details class="faq"><summary>改了 config.json 但没生效？</summary><div class="answer">先执行 <code>PreventCloningEnemyDinos.Reload</code> 命令热重载；控制台回绿字 Reloaded config 才算生效。若回红字 Failed to reload config，说明 JSON 格式有错（多半是少了逗号或引号），对照第四章的完整示例检查。</div></details>
+  <details class="faq"><summary>找不到 config.json 在哪？</summary><div class="answer">固定路径：<code>服务器目录\ShooterGame\Binaries\Win64\ArkApi\Plugins\PreventCloningEnemyDinos\config.json</code>。第一次部署时随插件一起放进去。注意：这个文件<b>必须存在</b>——被删掉或读不到时插件会加载失败（控制台报 Can't open config.json），把文件恢复后重启服务器即可；只是少写某个配置项则没关系，会按默认值运行。</div></details>
+  <details class="faq"><summary>配置值写错了会怎么样？</summary><div class="answer">不会崩服也不会加载失败：类型不对或数值越界的配置项会被忽略并保留默认值，同时控制台黄字提示是哪个键非法。对照黄字提示改回来再 Reload 即可。</div></details>
+  <details class="faq"><summary>怎么查谁尝试克隆别人的龙？</summary><div class="answer">看日志文件：服务器运行目录下的 <code>日志\日期.txt</code>（按天一个文件，UTF-8 编码），每条拦截记录包含玩家 SteamID、玩家部落、恐龙部落、恐龙名、命令名。</div></details>
+  <details class="faq"><summary>本部落互相克隆会被误拦吗？</summary><div class="answer">不会。判定标准是发起玩家与目标恐龙的部落 ID 一致即放行；只有克隆其他部落的龙才拦截。同部落的队友、自己的龙都正常克隆。</div></details>
+  <details class="faq"><summary>控制台中文显示乱码？</summary><div class="answer">把 config.json 里的 <code>ConsoleEncoding</code> 调成与服务器 ArkApi 版本匹配的值：3.54 的服务器填 <code>gbk</code>，3.55 填 <code>utf8</code>；不确定就保持 <code>auto</code> 自动探测，然后 Reload。乱码只影响控制台显示，不影响任何功能。</div></details>
+  <details class="faq"><summary>控制台黄字提示「未找到 APrimalDinoCharacter 类」？</summary><div class="answer">这是插件在服务器对象列表里没找到恐龙类的告警，出现期间克隆命令会全部放行（不拦截），插件每次处理克隆命令时都会自动重试，找到类后拦截自动恢复，告警只出现一次。正常情况不会出现；若持续出现导致拦截一直不生效，把服务器和 ArkApi 版本信息反馈给作者排查。</div></details>
+</section>
+
+<section class="unit" id="u12" data-cat="faq">
+  <div class="group">第七章 · 技术支持</div>
+  <h2>技术支持</h2>
+  <div class="note">反馈问题建议附上：服务器控制台的相关输出、<code>日志\日期.txt</code> 里的拦截记录、config.json 内容。联系方式：作者 QQ 711919；先锋方舟服主群 138535385。</div>
+</section>
+
+<div class="empty hide" id="emptyState">没有匹配的内容，换个关键词或分类试试</div>
+</main>
+</div>
+
+<footer class="foot">
+  禁止克隆敌对恐龙 · 服主教程 · 2026-09
+</footer>
+
+<script>
+(function(){
+var inp=document.getElementById('searchInput');
+var chips=[].slice.call(document.querySelectorAll('.chip'));
+var units=[].slice.call(document.querySelectorAll('.unit'));
+var empty=document.getElementById('emptyState');
+var cnt=document.getElementById('resultCount');
+var cat='all';
+function go(){
+  var q=(inp.value||'').trim().toLowerCase(),n=0;
+  units.forEach(function(u){
+    var okC=(cat=='all'||u.getAttribute('data-cat')==cat);
+    var t=(u.textContent||'').toLowerCase()+(u.getAttribute('data-kw')||'');
+    var okQ=!q||t.indexOf(q)>-1;
+    var s=okC&&okQ;u.classList.toggle('hide',!s);if(s)n++;
+  });
+  [].forEach.call(document.querySelectorAll('.toc a'),function(a){
+    var el=document.getElementById(a.getAttribute('href').slice(1));
+    a.classList.toggle('dim',!(el&&!el.classList.contains('hide')));
+  });
+  empty.classList.toggle('hide',n>0);
+  cnt.textContent=n+' / '+units.length+' 条';
+}
+chips.forEach(function(c){c.addEventListener('click',function(){
+  chips.forEach(function(x){x.classList.remove('on')});c.classList.add('on');
+  cat=c.getAttribute('data-cat');go();
+})});
+inp.addEventListener('input',go);go();
+})();
+</script>
+
+</body>
+</html>
